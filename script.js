@@ -2,14 +2,14 @@ const output = document.getElementById("output");
 
 // Initial loading row
 output.innerHTML = `
-  <tr>
+  <tr id="loading">
     <td colspan="2">Loading...</td>
   </tr>
 `;
 
 // Function to create promise
 function createPromise(index) {
-  const delay = Math.floor(Math.random() * 3) + 1; // 1 to 3 seconds
+  const delay = Math.floor(Math.random() * 3) + 1; // 1-3 seconds
 
   return new Promise((resolve) => {
     setTimeout(() => {
@@ -33,7 +33,7 @@ Promise.all(promises).then((results) => {
   // Remove loading row
   output.innerHTML = "";
 
-  // Add promise rows
+  // Add rows for each promise
   results.forEach((result) => {
     const row = document.createElement("tr");
 
@@ -45,7 +45,7 @@ Promise.all(promises).then((results) => {
     output.appendChild(row);
   });
 
-  // Find maximum time
+  // Calculate total time (maximum delay)
   const totalTime = Math.max(...results.map((r) => r.time));
 
   // Add total row
